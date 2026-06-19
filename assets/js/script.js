@@ -327,7 +327,9 @@ Version      : 1.0
         $('#contactForm .input-success').fadeOut(500);
         $('#contactForm .input-error').fadeOut(500);
 
-        fetch('/sendmail', {
+        const apiUrl = window.CONTACT_FORM_API_URL || '/sendmail';
+
+        fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
