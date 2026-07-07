@@ -299,7 +299,7 @@ Version      : 1.0
 
     /*
      * ----------------------------------------------------------------------------------------
-     *  NODE/NODemailer CONTACT FORM
+     *  Web3Forms CONTACT FORM
      * ----------------------------------------------------------------------------------------
      */
 
@@ -327,14 +327,13 @@ Version      : 1.0
         $('#contactForm .input-success').fadeOut(500);
         $('#contactForm .input-error').fadeOut(500);
 
-        const apiUrl = window.CONTACT_FORM_API_URL || '/sendmail';
+        var form = this;
+        var formData = new FormData(form);
+        formData.set('access_key', formData.get('access_key') || 'YOUR_WEB3FORMS_ACCESS_KEY');
 
-        fetch(apiUrl, {
+        fetch('https://api.web3forms.com/submit', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ name: name, email: email, subject: subject, message: message })
+            body: formData
         })
         .then(function(response) {
             return response.json();
